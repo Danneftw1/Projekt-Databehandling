@@ -10,7 +10,7 @@ class Hash_DataFrame:
             
             # Parses a error message if dataframe is not a pd.DataFrame.
             error_message = f"datafram need to be a DataFrame, not {type(dataframe).__name__()}"
-            raise TypeError(10)
+            raise TypeError(error_message)
         
         else:
 
