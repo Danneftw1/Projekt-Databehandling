@@ -9,8 +9,7 @@ class Hash_DataFrame:
         if not isinstance(dataframe, pd.DataFrame):
             
             # Parses a error message if dataframe is not a pd.DataFrame.
-            error_message = f"datafram need to be a DataFrame, not {type(dataframe).__name__()}"
-            raise TypeError(error_message)
+            raise TypeError(f"datafram need to be a DataFrame, not {type(dataframe).__name__}")
         
         else:
 
@@ -24,9 +23,13 @@ class Hash_DataFrame:
             if column not in df_data.columns:
                 
                 # Parses a error message if column is not a string.
-                raise TypeError(f"Column need to be a string, not {type(column).__name__()}")
+                raise ValueError(f"Column do not exist: {column}")
             
             else:
+
+                if df_data[column].dtype != object:
+
+                    raise TypeError(f"Cant encrypt columns that are int or float")
 
                 # encrypt the specific column with sha256
                 df_data[column] = df_data[column].apply(lambda x: hashlib.sha256(x.encode()).hexdigest()) 
