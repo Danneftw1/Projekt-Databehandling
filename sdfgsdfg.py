@@ -24,7 +24,7 @@ app.layout = html.Main([
     dcc.Dropdown(id= 'sportpicker-dropdown',
     options= dropdown_options
     ),
-    dcc.RadioItems(id = 'ohlc-radio', options= ohlc_options, value= 'Medals Won'), # open-high-low-close(options)
+    # dcc.RadioItems(id = 'ohlc-radio', options= ohlc_options, value= 'Medals Won'), # open-high-low-close(options)
     dcc.Graph(id = 'snowboard-graph'),
     dcc.Graph(id = 'football-graph'),
     dcc.Graph(id = 'ski-jumping-graph')
@@ -33,8 +33,12 @@ app.layout = html.Main([
 
 # To control our element that we've created
 @app.callback(
-    Output('football-graph', 'figure'),
-    Input('sportpicker-dropdown', 'value'),
+    Output(component_id='football-graph', component_property='figure'),
+    Input(component_id='sportpicker-dropdown', component_property='figure'),
+    
+    # Output('snowboard-graph', 'figure'),
+    # Input('sportpicker-dropdown', 'value'),
+    # input('ohlc-radio', 'value'),
 )
 
 def update_graph(sport):
@@ -46,9 +50,9 @@ def update_graph(sport):
     fig = px.scatter(df_sport,
             x='Year',
             y='Athlets',
-            title=f'Amount of athlets for {sport} Each Olympics')
+            title='Amount of athlets for '+sport+' Each Olympics',)
 
-    return fig
+    return fig.show()
 
 if __name__ == '__main__':
     app.run_server(debug = True)

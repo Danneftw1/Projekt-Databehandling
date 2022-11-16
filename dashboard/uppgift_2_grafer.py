@@ -75,6 +75,7 @@ plotly_bar_plot_with_labels_sublabels(
     sublabels_skiing
 )
 
+#--------------------------------------------------------------------------------------------------------------------------------------------
 
 def most_medals_per_country_sports(sport, df):
     # pick out every row that has snowboarding in it
@@ -98,9 +99,8 @@ def most_medals_per_country_sports(sport, df):
     fig.update_xaxes(tickangle=40)
     return fig.show()
 
-most_medals_per_country_sports("Ski Jumping", athlete_events)
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------------
 
 def amount_of_athlets(sport, df):
     df_sport = df[(df['Sport'] == sport)]
@@ -116,5 +116,3 @@ def amount_of_athlets(sport, df):
     )
 
     return fig.show()
-
-amount_of_athlets("Football", athlete_events)
