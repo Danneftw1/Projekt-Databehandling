@@ -73,42 +73,48 @@ plotly_bar_plot_with_labels_sublabels(
     'Top 3 Countries With Most Medals won in Ski Jumping',
     labels_skiing,
     sublabels_skiing
-
 )
 
 
-# pick out every row that has snowboarding in it
-snowboarding_olympics = athlete_events[(athlete_events["Sport"] == "Snowboarding")]
+def most_medals_per_country_sports(sport, df):
+    # pick out every row that has snowboarding in it
+    medals_olympics = df[(df["Sport"] == sport)]
 
+    # counts number of medals for each country in total, then is sorted in descending order
+    medals_olympics = (
+        medals_olympics.groupby(["Team"])["Medal"]
+        .count()
+        .reset_index(name="Count") # new name for medal column
+        .sort_values(["Count"], ascending=False)
+    )
 
-# counts number of medals for each country in total, then is sorted in descending order
-snowboarding_olympics = (
-    snowboarding_olympics.groupby(["Team"])["Medal"]
-    .count()
-    .reset_index(name="Count") # new name for medal column
-    .sort_values(["Count"], ascending=False)
-)
-
-fig = px.bar(
-    snowboarding_olympics.head(10),
-    x='Team',
-    y='Count',
-    title='Antal Medaljer'
-    
-)
-fig.update_xaxes(tickangle=40)
-fig.show()
-
-football_df = athlete_events[(athlete_events['Sport'] == "Football")]
-
-tmp = football_df.groupby(['Year', 'City'])['Season'].value_counts()
-football_df = pd.DataFrame(data={'Athlets': tmp.values}, index=tmp.index).reset_index()
-
-fig = px.scatter(football_df,
-        x='Year',
-        y='Athlets',
-        title='Amount of Football Players For Each Olympics',
+    fig = px.bar(
+        medals_olympics.head(10),
+        x='Team',
+        y='Count',
+        title='Antal Medaljer per land inom '+sport
         
-)
+    )
+    fig.update_xaxes(tickangle=40)
+    return fig.show()
 
-fig.show()
+most_medals_per_country_sports("Ski Jumping", athlete_events)
+
+
+
+def amount_of_athlets(sport, df):
+    df_sport = df[(df['Sport'] == sport)]
+
+    tmp = df_sport.groupby(['Year', 'City'])['Season'].value_counts()
+    df_sport = pd.DataFrame(data={'Athlets': tmp.values}, index=tmp.index).reset_index()
+
+    fig = px.scatter(df_sport,
+            x='Year',
+            y='Athlets',
+            title='Amount of athlets for '+sport+' Each Olympics',
+            
+    )
+
+    return fig.show()
+
+amount_of_athlets("Football", athlete_events)
