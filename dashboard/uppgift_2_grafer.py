@@ -99,8 +99,8 @@ def most_medals_per_country_sports(sport, df):
         title='Antal Medaljer per land inom '+sport
         
     )
-    fig.update_xaxes(tickangle=40)
-    return fig.show()
+    # fig.update_xaxes(tickangle=40)
+    return fig
 
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
@@ -114,8 +114,9 @@ def amount_of_athlets(sport, df):
     fig = px.scatter(df_sport,
             x='Year',
             y='Athlets',
+            size='Year',
             title='Amount of athlets for '+sport+' Each Olympics',
             
     )
 
-    return fig.show()
+    return fig
