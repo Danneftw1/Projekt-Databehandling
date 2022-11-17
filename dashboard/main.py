@@ -8,14 +8,14 @@ from dash import html, dcc
 from uppgift_2_grafer import most_medals_per_country_sports, amount_of_athlets
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
-sport_dict = {'SJ': 'Ski Jumping', 'SB': 'Snowboard', 'FB': 'Football'}
+sport_dict = {'Ski Jumping': 'Ski Jumping', 'Snowboarding': 'Snowboarding', 'Football': 'Football', 'Bobsleigh': 'Bobsleigh'}
 
 # Creates the Dash app
 app = dash.Dash(__name__)
 
 # variable names:
 dropdown_options = [{'label': name, 'value': sport} for sport, name in sport_dict.items()]
-ohlc_options = [{'label': option, 'value': option} for option in ('Medals Won', 'Medal Distribution', 'Amount of Athlets')]
+ohlc_options = [{'label': option, 'value': option} for option in ('Medals Won', 'Amount of Athlets')]
 
 # Set up the app layout
 app.layout = html.Main([
@@ -25,16 +25,16 @@ app.layout = html.Main([
     options= dropdown_options
     ),
     dcc.RadioItems(id = 'ohlc-radio', options= ohlc_options, value= 'Medals Won'), # open-high-low-close(options)
-    dcc.Graph(id = 'snowboard-graph'),
-    dcc.Graph(id = 'football-graph'),
-    dcc.Graph(id = 'ski-jumping-graph')
+    dcc.Graph(id = 'athlete-graph'),
     ]
 )
 
 # To control our element that we've created
 @app.callback(
-    Output('football-graph', 'figure'),
+    Output('athlete-graph', 'figure'),
     Input('sportpicker-dropdown', 'value'),
+    Output('athlete-graph', 'figure'),
+    input('ohlc-radio', 'value')
 )
 
 def update_graph(sport):
@@ -46,6 +46,7 @@ def update_graph(sport):
     fig = px.scatter(df_sport,
             x='Year',
             y='Athlets',
+            size='Year',
             title=f'Amount of athlets for {sport} Each Olympics')
 
     return fig
