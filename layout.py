@@ -21,4 +21,4 @@ class Layout:
                 
              ],className="g-0", justify="start",)
             
-            ], fluid= True)
+            ], fluid= True) 
