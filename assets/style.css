@@ -1,0 +1,41 @@
+body {
+    background-color: #F8F8F8;
+}
+
+.container-fluid {
+    padding: 0;
+    
+}
+
+header{
+    width: 100;
+    padding: 1rem 0;
+    background-color: #FFFFFF;
+}
+
+h1 {
+    margin-left: 2rem;
+}
+
+#con1 {
+    background-color: red;
+    height: 100%;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#con2 {
+    background-color: blue;
+    height: 100%;
+    
+}
+
+.col {
+    height: 90vh;
+    padding: 0px;
+}
+
+#col {
+    margin-left: 5px;
+}
+
