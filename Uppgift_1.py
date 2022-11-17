@@ -101,4 +101,3 @@ def sex_distribution():
     return fig
 
 
-print(sport_medals())

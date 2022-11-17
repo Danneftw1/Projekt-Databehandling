@@ -7,9 +7,12 @@ body {
     
 }
 
+/* ################################ */
+/* Header */
+
 header{
     width: 100;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     background-color: #FFFFFF;
 }
 
@@ -17,25 +20,71 @@ h1 {
     margin-left: 2rem;
 }
 
-#con1 {
-    background-color: red;
-    height: 100%;
+/* ################################ */
+/* Containers */
+
+#Container-1 {
+
+    height: 90vh;
     margin-right: 0px; 
     margin-left: 0px;
 }
 
-#con2 {
-    background-color: blue;
-    height: 100%;
-    
+#Container-2 {
+    height: 100vh;
+    margin-right: 0px; 
+    margin-left: 0px;
 }
 
-.col {
-    height: 90vh;
+/* ################################ */
+/* Rows */
+
+.row {
+    margin: 0px;
     padding: 0px;
 }
 
-#col {
-    margin-left: 5px;
+/* ################################ */
+/* Columns */
+
+.right-Columns {
+    padding: 0px;
+}
+
+.side-Columns {
+    padding: 0px;
+    
+}
+
+/* ################################ */
+/* Cards */
+
+.mini-Card {
+    margin: 5vh;
+    height: 15vh;
+}
+
+.medium-Card {
+    margin: 5vh;
+    margin-top: 5vh;
+    height: 30vh;
+}
+
+.big-Card {
+    margin: 2vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    /* height: 50vh; */
+}
+
+
+
+/* ################################ */
+/* Dropdown */
+
+.dropdown {
+    /* margin-left: 8%; */
+    margin-bottom: 2%;
+    width: 20%;
 }
 

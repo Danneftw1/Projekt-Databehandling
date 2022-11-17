@@ -19,8 +19,8 @@ lxml = "*"
 python-dotenv = "*"
 dash = "*"
 dash-bootstrap-components = "*"
-numpy = "*"
 pandas = "*"
+numpy = "*"
 
 [dev-packages]
 
