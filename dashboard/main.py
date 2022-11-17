@@ -8,6 +8,7 @@ from dash import html, dcc
 from uppgift_2_grafer import most_medals_per_country_sports, amount_of_athlets
 from uppgift_1_grafer import *
 
+
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 sport_dict = {'Ski Jumping': 'Ski Jumping', 'Snowboarding': 'Snowboarding', 'Football': 'Football', 'Bobsleigh': 'Bobsleigh'}
 game_dict = {'Summer': 'Summer', 'Winter': 'Winter','Summer & Winter': 'Summer & Winter'}
