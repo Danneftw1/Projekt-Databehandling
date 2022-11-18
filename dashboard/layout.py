@@ -43,8 +43,18 @@ class Layout:
 
                                     dbc.CardBody([
                                         html.H2("Data & Graphs for Olympics"),
-                                        dcc.Dropdown(className="dropdown", id='sportpicker-dropdown', options= self._dropdown_options_medals_athlets, value='Snowboarding'),
-                                        dcc.RadioItems(id = 'sub-options-dropdown', options= self._sub_options_dropdown, value= 'Medals Won'), # open-high-low-close(options)
+
+                                        dbc.Row([
+                                            dbc.Col([
+                                                dcc.Dropdown(className="dropdown", id='sportpicker-dropdown', options= self._dropdown_options_medals_athlets, value='Snowboarding'),
+                                            ]),
+
+                                            dbc.Col([
+                                                dcc.RadioItems(className="radio-button", id = 'sub-options-dropdown', options= self._sub_options_dropdown, value= 'Medals Won'), # open-high-low-close(options)
+                                            ]),
+                                        ]),
+                                        
+                                        
                                         dcc.Graph(id = 'athlete-medal-graph'),
                                     ]),
                                     

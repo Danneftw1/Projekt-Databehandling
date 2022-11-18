@@ -72,6 +72,7 @@ h1 {
     margin: 5vh;
     margin-top: 5vh;
     height: 45vh;
+    border-radius: 10px;
 }
 
 .big-Card {
@@ -80,6 +81,7 @@ h1 {
     margin-right: 5vh;
     margin-top: 5vh;
     color: black;
+    border-radius: 10px;
     /* height: 50vh; */
 }
 
@@ -91,7 +93,15 @@ h1 {
 .dropdown {
     /* margin-left: 8%; */
     margin-bottom: 2%;
-    width: 20%;
+    width: 50%;
+}
+
+.radio-button label{
+    margin-right: 10px;
+}
+
+.radio-button label input{
+    margin-right: 10px;
 }
 
 #pie_Chart {

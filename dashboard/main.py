@@ -24,7 +24,7 @@ sub_options_dropdown = [{'label': option, 'value': option} for option in ('Medal
 # Creates the Dash app
 app = dash.Dash(
     __name__,
-    external_stylesheets=[dbc.themes.QUARTZ],
+    external_stylesheets=[dbc.themes.LUMEN],
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
 
