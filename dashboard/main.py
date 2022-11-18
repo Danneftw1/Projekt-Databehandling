@@ -13,7 +13,7 @@ from hash_data import Hash_DataFrame as hd
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 athlete_events = hd.hash_Columns(athlete_events, ["Name"])
 sport_dict = {'Ski Jumping': 'Ski Jumping', 'Snowboarding': 'Snowboarding', 'Football': 'Football', 'Bobsleigh': 'Bobsleigh'}
-game_dict = {0 : 'Summer', 1 : 'Winter', 2 : 'Summer & Winter'}
+game_dict = {"0" : 'Summer & Winter', "1" : 'Summer', "2" : 'Winter'}
 
 # Creates the Dash app
 app = dash.Dash(__name__)
@@ -39,7 +39,7 @@ app.layout = html.Main([
     html.P('Choose a Season'),
     dcc.Dropdown(id = 'game-picker',
     options=game_dict,
-    value='Summer'
+    value='1'
     ),
     dcc.Graph(id = 'sweden-medal-graph') # second graph
 

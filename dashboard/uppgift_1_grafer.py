@@ -57,7 +57,7 @@ def total_medels_os(value):
     titels = ["Total number of medals per OS", "Total number of medals per summer OS", "Total number of medals per winter OS"]
     columns = [["Summer medals", "Winter medals"], "Summer medals", "Winter medals"]
 
-    fig = px.bar(df_os_medals, x= "Year", y=columns[value], barmode="group", title= titels[value])
+    fig = px.bar(df_os_medals, x= "Year", y=columns[int(value)], barmode="group", title= titels[int(value)])
     fig.update_layout(
         yaxis_title="number of medals"
     )
