@@ -4,58 +4,48 @@ import numpy as np
 import matplotlib.pyplot as plt
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
+# import tool for lambda func (used on line 44)
+import functools as ft
+
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 noc_regions = pd.read_csv("../Projekt-Databehandling/Data/noc_regions.csv")
 
-def medal_distribution():
+def medal_distribution_per_sport(sport, df):
 
-    ski_jumping = athlete_events[(athlete_events["Sport"] == "Ski Jumping")]
+    ski_jumping = df[(df["Sport"] == sport)]
 
-    skiing_olympics = (
-        ski_jumping.groupby(["Team"])["Medal"]
+    bronze_ski_jumping = ski_jumping[(ski_jumping["Medal"] == "Bronze")]
+    silver_ski_jumping = ski_jumping[(ski_jumping["Medal"] == "Silver")]
+    gold_ski_jumping = ski_jumping[(ski_jumping["Medal"] == "Gold")]
+
+    bronze_ski_jumping = (
+        bronze_ski_jumping.groupby(["Team"])["Medal"]
         .count()
-        .reset_index(name="Count") # new name for medal column
-        .sort_values(["Count"], ascending=False)
+        .reset_index(name="Bronze") # new name for medal column
+        .sort_values(["Bronze"], ascending=False)
     )
 
-    skiing_olympics.head(3)
-
-    top_countries_medals = ski_jumping[(ski_jumping["Team"] == "Austria") | (ski_jumping["Team"] == "Norway") | (ski_jumping["Team"] == "Finland")]
-
-    bronze_ski_jumping = top_countries_medals[(top_countries_medals["Medal"] == "Bronze")]
-    silver_ski_jumping = top_countries_medals[(top_countries_medals["Medal"] == "Silver")]
-    gold_ski_jumping = top_countries_medals[(top_countries_medals["Medal"] == "Gold")]
-
-    medals_per_country = ski_jumping.groupby("Team")["Medal"].value_counts(dropna=True)
-    bronze_ski_jumping = bronze_ski_jumping.groupby("Team")["Medal"].value_counts(
-        dropna=False
+    silver_ski_jumping = (
+        silver_ski_jumping.groupby(["Team"])["Medal"]
+        .count()
+        .reset_index(name="Silver") # new name for medal column
+        .sort_values(["Silver"], ascending=False)
     )
-    silver_ski_jumping = silver_ski_jumping.groupby("Team")["Medal"].value_counts(
-        dropna=False
+
+    gold_ski_jumping = (
+        gold_ski_jumping.groupby(["Team"])["Medal"]
+        .count()
+        .reset_index(name="Gold") # new name for medal column
+        .sort_values(["Gold"], ascending=False)
     )
-    gold_ski_jumping = gold_ski_jumping.groupby("Team")["Medal"].value_counts(dropna=False)
 
-
-    def plotly_bar_plot_with_labels_sublabels(
-        x, y, title, labels, sublabels,
-    ):
-
-        fig = px.bar(
-            x=x,
-            y=y,
-            barmode="group",  # groups the bars next to eachother instead of stacking on eachother
-            labels=labels,
-            title=title,
-        )
-        newnames = sublabels
-        # To be able to change the sub titles for 'Antal doser' without changing the data source,
-        # you can switch the legendgroups name with a dict and map it onto existing subtitle names.
-        # I had to do this since I couldn't change it through 'labels=' like the other titles
-        # source: https://stackoverflow.com/questions/64371174/plotly-how-to-change-variable-label-names-for-the-legend-in-a-plotly-express-li
-        fig.for_each_trace(lambda t: t.update(name=newnames[t.name]))
-
-        fig.show()
-
+    medal_total = [bronze_ski_jumping, silver_ski_jumping, gold_ski_jumping]
+    # Added a lambda function in order to merge 3 dataframes with only needed columns
+    df_final = ft.reduce(lambda left, right: pd.merge(left, right), medal_total)
+    # Creates a sum column with total medal sum, only for sorting purpose
+    df_final['Sum'] = df_final.sum(axis=1)
+    # sort by 'sum' column - highest to lowest
+    df_final.sort_values(by='Sum', ascending=False, inplace=True)
 
     labels_skiing = {
         "value": "Medals won",
@@ -69,14 +59,21 @@ def medal_distribution():
         "wide_variable_2": "Gold",
     }
 
-    plotly_bar_plot_with_labels_sublabels(
-        top_countries_medals.Team.unique(),
-        [bronze_ski_jumping, silver_ski_jumping, gold_ski_jumping],
-        'Top 3 Countries With Most Medals won in Ski Jumping',
-        labels_skiing,
-        sublabels_skiing
+    fig = px.bar(
+        x=df_final["Team"],
+        y=[df_final["Bronze"],df_final["Silver"], df_final["Gold"]],
+        barmode="group",  # groups the bars next to eachother instead of stacking on eachother
+        labels=labels_skiing,
+        title=f'Top Countries With Most Medals won in {sport}',
     )
+    newnames = sublabels_skiing
+    # To be able to change the sub titles for 'Antal doser' without changing the data source,
+    # you can switch the legendgroups name with a dict and map it onto existing subtitle names.
+    # I had to do this since I couldn't change it through 'labels=' like the other titles
+    # source: https://stackoverflow.com/questions/64371174/plotly-how-to-change-variable-label-names-for-the-legend-in-a-plotly-express-li
+    fig.for_each_trace(lambda t: t.update(name=newnames[t.name]))
 
+    return fig
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 

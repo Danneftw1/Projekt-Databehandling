@@ -5,14 +5,14 @@ import plotly_express as px
 import pandas as pd
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from uppgift_2_grafer import most_medals_per_country_sports, amount_of_athlets
+from uppgift_2_grafer import *
 from uppgift_1_grafer import *
 from hash_data import Hash_DataFrame as hd
 
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 athlete_events = hd.hash_Columns(athlete_events, ["Name"])
-sport_dict = {'Ski Jumping': 'Ski Jumping', 'Snowboarding': 'Snowboarding', 'Football': 'Football', 'Bobsleigh': 'Bobsleigh'}
+sport_dict = {'Ski Jumping': 'Ski Jumping', 'Snowboarding': 'Snowboarding', 'Speed Skating': 'Speed Skating', 'Freestyle Skiing': 'Freestyle Skiing', 'Archery': 'Archery'}
 game_dict = {"0" : 'Summer & Winter', "1" : 'Summer', "2" : 'Winter'}
 
 # Creates the Dash app
@@ -21,7 +21,7 @@ app = dash.Dash(__name__)
 # variable names:
 dropdown_options_medals_athlets = [{'label': name, 'value': sport} for sport, name in sport_dict.items()]
 dropdown_options_sweden_medals = [{'label': name, 'value': season} for season, name in game_dict.items()]
-sub_options_dropdown = [{'label': option, 'value': option} for option in ('Medals Won', 'Amount of Athlets')]
+sub_options_dropdown = [{'label': option, 'value': option} for option in ('Medals Won', 'Amount of Athlets', 'Medal Distribution')]
 
 # Set up the app layout
 app.layout = html.Main([
@@ -60,6 +60,9 @@ def update_first_graph(sport, graph):
 
     elif graph == 'Medals Won':
         return most_medals_per_country_sports(sport, athlete_events)
+    
+    elif graph == "Medal Distribution":
+        return medal_distribution_per_sport(sport, athlete_events)
 
 # Controlling elements for second graph
 @app.callback(
