@@ -96,7 +96,7 @@ def most_medals_per_country_sports(sport, df):
         medals_olympics.head(10),
         x='Team',
         y='Count',
-        title='Antal Medaljer per land inom '+sport
+        title=f'Amount of Medals Per Country for {sport}'
         
     )
     # fig.update_xaxes(tickangle=40)
