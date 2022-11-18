@@ -12,7 +12,7 @@ from hash_data import Hash_DataFrame as hd
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 athlete_events = hd.hash_Columns(athlete_events, ["Name"])
-sport_dict = {'Ski Jumping': 'Ski Jumping', 'Snowboarding': 'Snowboarding', 'Speed Skating': 'Speed Skating', 'Freestyle Skiing': 'Freestyle Skiing', 'Archery': 'Archery'}
+sport_dict = {'Biathlon': 'Biathlon', 'Snowboarding': 'Snowboarding', 'Alpine Skiing': 'Alpine Skiing', 'Freestyle Skiing': 'Freestyle Skiing', 'Boxing': 'Boxing', 'Weightlifting': 'Weightlifting'}
 game_dict = {"0" : 'Summer & Winter', "1" : 'Summer', "2" : 'Winter'}
 
 # Creates the Dash app

@@ -39,7 +39,7 @@ def medal_distribution_per_sport(sport, df):
         .sort_values(["Gold"], ascending=False)
     )
 
-    medal_total = [bronze_medal, silver_medal, gold_medal]
+    medal_total = [gold_medal, silver_medal ,bronze_medal]
     # Added a lambda function in order to merge 3 dataframes with only needed columns
     df_final = ft.reduce(lambda left, right: pd.merge(left, right), medal_total)
     # Creates a sum column with total medal sum, only for sorting purpose
@@ -54,14 +54,14 @@ def medal_distribution_per_sport(sport, df):
     }
 
     sublabels = {
-        "wide_variable_0": "Bronze",
+        "wide_variable_0": "Gold",
         "wide_variable_1": "Silver",
-        "wide_variable_2": "Gold",
+        "wide_variable_2": "Bronze",
     }
 
     fig = px.bar(
         x=df_final["Team"],
-        y=[df_final["Bronze"],df_final["Silver"], df_final["Gold"]],
+        y=[df_final["Gold"], df_final["Silver"], df_final["Bronze"]],
         barmode="group",  # groups the bars next to eachother instead of stacking on eachother
         labels=labels,
         title=f'Top Countries With Most Medals won in {sport}',
