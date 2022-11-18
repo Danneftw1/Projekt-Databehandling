@@ -8,7 +8,7 @@ from layout import Layout
 # creates the dash app
 app = dash.Dash(
     __name__,
-    external_stylesheets=[dbc.themes.MATERIA],
+    external_stylesheets=[dbc.themes.QUARTZ],
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
 
