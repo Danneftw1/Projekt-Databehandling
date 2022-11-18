@@ -4,8 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-numpy = "*"
-pandas = "*"
 matplotlib = "*"
 ipykernel = "*"
 black = "*"
@@ -21,6 +19,8 @@ lxml = "*"
 python-dotenv = "*"
 dash = "*"
 dash-bootstrap-components = "*"
+pandas = "*"
+numpy = "*"
 
 [dev-packages]
 
