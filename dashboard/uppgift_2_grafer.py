@@ -12,34 +12,34 @@ noc_regions = pd.read_csv("../Projekt-Databehandling/Data/noc_regions.csv")
 
 def medal_distribution_per_sport(sport, df):
 
-    ski_jumping = df[(df["Sport"] == sport)]
+    sports_olympics = df[(df["Sport"] == sport)]
 
-    bronze_ski_jumping = ski_jumping[(ski_jumping["Medal"] == "Bronze")]
-    silver_ski_jumping = ski_jumping[(ski_jumping["Medal"] == "Silver")]
-    gold_ski_jumping = ski_jumping[(ski_jumping["Medal"] == "Gold")]
+    bronze_medal = sports_olympics[(sports_olympics["Medal"] == "Bronze")]
+    silver_medal = sports_olympics[(sports_olympics["Medal"] == "Silver")]
+    gold_medal = sports_olympics[(sports_olympics["Medal"] == "Gold")]
 
-    bronze_ski_jumping = (
-        bronze_ski_jumping.groupby(["Team"])["Medal"]
+    bronze_medal = (
+        bronze_medal.groupby(["Team"])["Medal"]
         .count()
         .reset_index(name="Bronze") # new name for medal column
         .sort_values(["Bronze"], ascending=False)
     )
 
-    silver_ski_jumping = (
-        silver_ski_jumping.groupby(["Team"])["Medal"]
+    silver_medal = (
+        silver_medal.groupby(["Team"])["Medal"]
         .count()
         .reset_index(name="Silver") # new name for medal column
         .sort_values(["Silver"], ascending=False)
     )
 
-    gold_ski_jumping = (
-        gold_ski_jumping.groupby(["Team"])["Medal"]
+    gold_medal = (
+        gold_medal.groupby(["Team"])["Medal"]
         .count()
         .reset_index(name="Gold") # new name for medal column
         .sort_values(["Gold"], ascending=False)
     )
 
-    medal_total = [bronze_ski_jumping, silver_ski_jumping, gold_ski_jumping]
+    medal_total = [bronze_medal, silver_medal, gold_medal]
     # Added a lambda function in order to merge 3 dataframes with only needed columns
     df_final = ft.reduce(lambda left, right: pd.merge(left, right), medal_total)
     # Creates a sum column with total medal sum, only for sorting purpose
@@ -47,13 +47,13 @@ def medal_distribution_per_sport(sport, df):
     # sort by 'sum' column - highest to lowest
     df_final.sort_values(by='Sum', ascending=False, inplace=True)
 
-    labels_skiing = {
+    labels = {
         "value": "Medals won",
         "variable": "Medals",
         "x": "Teams",
     }
 
-    sublabels_skiing = {
+    sublabels = {
         "wide_variable_0": "Bronze",
         "wide_variable_1": "Silver",
         "wide_variable_2": "Gold",
@@ -63,10 +63,10 @@ def medal_distribution_per_sport(sport, df):
         x=df_final["Team"],
         y=[df_final["Bronze"],df_final["Silver"], df_final["Gold"]],
         barmode="group",  # groups the bars next to eachother instead of stacking on eachother
-        labels=labels_skiing,
+        labels=labels,
         title=f'Top Countries With Most Medals won in {sport}',
     )
-    newnames = sublabels_skiing
+    newnames = sublabels
     # To be able to change the sub titles for 'Antal doser' without changing the data source,
     # you can switch the legendgroups name with a dict and map it onto existing subtitle names.
     # I had to do this since I couldn't change it through 'labels=' like the other titles
