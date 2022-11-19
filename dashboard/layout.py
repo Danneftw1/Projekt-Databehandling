@@ -49,8 +49,7 @@ class Layout:
                                                     dbc.Card(
                                                         [
                                                             dbc.CardBody(
-                                                                [   
-                                                                    
+                                                                [
                                                                     dbc.Row(
                                                                         [
                                                                             dbc.Col(
@@ -59,7 +58,7 @@ class Layout:
                                                                                         "Data & Graphs for Olympics"
                                                                                     ),
                                                                                 ],
-                                                                                width= 7
+                                                                                width=7,
                                                                             ),
                                                                             dbc.Col(
                                                                                 [
@@ -77,31 +76,29 @@ class Layout:
                                                                                             ),
                                                                                         ]
                                                                                     ),
-
-                                                                                    dbc.Row([
-
-                                                                                        dbc.Col([
-
+                                                                                    dbc.Row(
+                                                                                        [
                                                                                             dbc.Col(
                                                                                                 [
-                                                                                                    dcc.RadioItems(
-                                                                                                        className="radio-button",
-                                                                                                        id="sub-options-dropdown",
-                                                                                                        options=self._sub_options_dropdown,
-                                                                                                        value="Medals Won",
-                                                                                                    ),  # open-high-low-close(options)
+                                                                                                    dbc.Col(
+                                                                                                        [
+                                                                                                            dcc.RadioItems(
+                                                                                                                className="radio-button",
+                                                                                                                id="sub-options-dropdown",
+                                                                                                                options=self._sub_options_dropdown,
+                                                                                                                value="Medals Won",
+                                                                                                            ),  # open-high-low-close(options)
+                                                                                                        ]
+                                                                                                    ),
                                                                                                 ]
-                                                                                            ),
-
-                                                                                        ])
-
-                                                                                    ]),
-
+                                                                                            )
+                                                                                        ]
+                                                                                    ),
                                                                                 ]
                                                                             ),
-                                                                        ], id= "row-id",
+                                                                        ],
+                                                                        className="row-shadow",
                                                                     ),
-                                                                    
                                                                     dcc.Graph(
                                                                         id="athlete-medal-graph"
                                                                     ),
@@ -141,14 +138,28 @@ class Layout:
                                                         [
                                                             dbc.CardBody(
                                                                 [
-                                                                    html.H2(
-                                                                        "How Many Medals Sweden Has Won In The Olympics"
-                                                                    ),
-                                                                    dcc.Dropdown(
-                                                                        className="dropdown",
-                                                                        id="game-picker",
-                                                                        options=self._game_dict,
-                                                                        value="1",
+                                                                    dbc.Row(
+                                                                        [
+                                                                            dbc.Col(
+                                                                                [
+                                                                                    html.H2(
+                                                                                        "How Many Medals Sweden Has Won In The Olympics"
+                                                                                    ),
+                                                                                ],
+                                                                                width=7,
+                                                                            ),
+                                                                            dbc.Col(
+                                                                                [
+                                                                                    dcc.Dropdown(
+                                                                                        className="dropdown",
+                                                                                        id="game-picker",
+                                                                                        options=self._game_dict,
+                                                                                        value="1",
+                                                                                    ),
+                                                                                ]
+                                                                            ),
+                                                                        ],
+                                                                        className="row-shadow",
                                                                     ),
                                                                     dcc.Graph(
                                                                         id="sweden-medal-graph"

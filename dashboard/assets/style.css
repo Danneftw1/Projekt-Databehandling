@@ -118,7 +118,7 @@ h2 {
     width: 100%;
 }
 
-#row-id {
+.row-shadow {
     box-shadow: 1px 0px #DDDDDD;
     padding-bottom: 15px;
     margin-bottom: 10px;
