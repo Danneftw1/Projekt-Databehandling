@@ -77,6 +77,7 @@ def update_first_graph(sport, graph):
 def update_second_graph(season):
     return total_medels_os(season)
 
+
 if __name__ == '__main__':
     app.run_server(debug = True)
 

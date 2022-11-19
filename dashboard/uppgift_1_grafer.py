@@ -96,6 +96,6 @@ def sex_distribution():
     df_swe_sex = df_swe_sex.groupby("Sex")["Sex"].count()
 
     # Plots graph
-    fig = px.bar(df_swe_sex, x= df_swe_sex.index, y= "Sex")
-    
+    fig = px.pie(df_swe_sex, names= df_swe_sex.index, values= "Sex")
+    fig.update_layout(margin=dict(t=0, b=0, l=0, r=0))
     return fig

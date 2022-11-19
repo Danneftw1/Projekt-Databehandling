@@ -1,5 +1,6 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
+from uppgift_1_grafer import *
 
 
 class Layout:
@@ -34,7 +35,7 @@ class Layout:
                                 ),
                                 dbc.Col([dbc.NavbarBrand("Sweden")]),
                             ]
-                        )
+                        ),
                     ]
                 ),
                 dbc.Row(
@@ -80,17 +81,13 @@ class Layout:
                                                                                         [
                                                                                             dbc.Col(
                                                                                                 [
-                                                                                                    dbc.Col(
-                                                                                                        [
-                                                                                                            dcc.RadioItems(
-                                                                                                                className="radio-button",
-                                                                                                                id="sub-options-dropdown",
-                                                                                                                options=self._sub_options_dropdown,
-                                                                                                                value="Medals Won",
-                                                                                                            ),  # open-high-low-close(options)
-                                                                                                        ]
-                                                                                                    ),
-                                                                                                ]
+                                                                                                    dcc.RadioItems(
+                                                                                                        className="radio-button",
+                                                                                                        id="sub-options-dropdown",
+                                                                                                        options=self._sub_options_dropdown,
+                                                                                                        value="Medals Won",
+                                                                                                    ),  # open-high-low-close(options)
+                                                                                                ], id= "radio-col"
                                                                                             )
                                                                                         ]
                                                                                     ),
@@ -109,6 +106,7 @@ class Layout:
                                                     ),
                                                 ],
                                                 className="right-Columns",
+                                                width=8,
                                             ),
                                             dbc.Col(
                                                 [
@@ -116,9 +114,8 @@ class Layout:
                                                         [
                                                             dbc.CardBody(
                                                                 [
-                                                                    html.H2("Card #5"),
                                                                     dcc.Graph(
-                                                                        id="pie_Chart"
+                                                                        id="pie_Chart", figure= sex_distribution(), 
                                                                     ),
                                                                 ]
                                                             )
