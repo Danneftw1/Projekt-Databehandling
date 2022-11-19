@@ -1,11 +1,11 @@
 body {
-    background-color: #F8F8F8;
+    background-color: #F1F5F7;
 }
 
 .container-fluid {
     padding: 0;
     margin: 0;
-    background-color: #F8F8F8;
+    background-color: #F1F5F7;
 }
 
 /* ################################ */
@@ -22,6 +22,10 @@ header{
 h1 {
     margin-left: 2rem;
     color: black;
+}
+
+h2 {
+    font-size: 20px;
 }
 
 /* ################################ */
@@ -93,7 +97,7 @@ h1 {
 .dropdown {
     /* margin-left: 8%; */
     margin-bottom: 2%;
-    width: 50%;
+    width: 100%;
 }
 
 .radio-button label{
@@ -112,4 +116,10 @@ h1 {
 
 #athlete-medal-graph {
     width: 100%;
+}
+
+#row-id {
+    box-shadow: 1px 0px #DDDDDD;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
 }
