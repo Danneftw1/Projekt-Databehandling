@@ -123,7 +123,10 @@ class Layout:
                                                         className="medium-Card",
                                                     )
                                                 ],
-                                                width=4,
+                                                lg=4,
+                                                xl=4, 
+                                                md=12,
+                                                sm=12,
                                             ),
                                         ]
                                     ),
@@ -167,8 +170,30 @@ class Layout:
                                                         className="big-Card",
                                                     ),
                                                 ],
-                                                className="right-Columns",
+                                                className="right-Columns", 
                                             ),
+
+                                            dbc.Col(
+                                                [
+                                                    dbc.Card(
+                                                        [
+                                                            dbc.CardBody(
+                                                                [
+                                                                    dcc.Graph(
+                                                                        id= "graph-4" 
+                                                                    ),
+                                                                ]
+                                                            )
+                                                        ],
+                                                        className="medium-Card",
+                                                    )
+                                                ],
+                                                lg=4,
+                                                xl=4, 
+                                                md=12,
+                                                sm=12,
+                                            ),
+
                                         ]
                                     ),
                                 ],
