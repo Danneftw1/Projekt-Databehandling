@@ -106,7 +106,7 @@ class Layout:
                                                     ),
                                                 ],
                                                 className="right-Columns",
-                                                width=8,
+                                                
                                             ),
                                             dbc.Col(
                                                 [
