@@ -3,12 +3,13 @@ import plotly_express as px
 import numpy as np
 import matplotlib.pyplot as plt
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
-
 # import tool for lambda func (used on line 44)
 import functools as ft
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 noc_regions = pd.read_csv("../Projekt-Databehandling/Data/noc_regions.csv")
+
+#-------------------------------------------------------------------------------------------------------------------------------------
 
 def medal_distribution_per_sport(sport, df):
 
@@ -112,7 +113,7 @@ def amount_of_athlets(sport, df):
             x='Year',
             y='Athlets',
             size='Year',
-            title='Amount of athlets for '+sport+' Each Olympics',
+            title=f'Amount of athlets for {sport} Each Olympics',
             
     )
 
