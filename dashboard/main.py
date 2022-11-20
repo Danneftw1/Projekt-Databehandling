@@ -12,6 +12,8 @@ from hash_data import Hash_DataFrame as hd
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 athlete_events = hd.hash_Columns(athlete_events, ["Name"])
+
+# dropdown menu name variables:
 sport_dict = {
     "Biathlon": "Biathlon",
     "Snowboarding": "Snowboarding",
@@ -51,12 +53,12 @@ app.layout = html.Main(
         dcc.RadioItems(
             id="sub-options-dropdown", options=sub_options_dropdown, value="Medals Won"
         ),  # open-high-low-close(options)
-        dcc.Graph(id="athlete-medal-graph"),  # first graph
+        dcc.Graph(id="athlete-medal-graph"),  # first graph figure
         # -------------SECOND GRAPH(S)----------------------------------
         html.H1("How Many Medals Sweden Has Won In The Olympics"),
         html.P("Choose a Season"),
         dcc.Dropdown(id="game-picker", options=game_dict, value="1"),
-        dcc.Graph(id="sweden-medal-graph"),  # second graph
+        dcc.Graph(id="sweden-medal-graph"),  # second graph figure
     ]
 )
 
@@ -66,6 +68,9 @@ app.layout = html.Main(
     Input("sportpicker-dropdown", "value"),
     Input("sub-options-dropdown", "value"),
 )
+
+# all graphs are functions from other .py-files that are just imported into main.py
+# makes main.py much easier to read code-wise
 def update_first_graph(sport, graph):
     # if-statements for sub-options-dropdown
     if graph == "Amount of Athlets":
@@ -79,10 +84,13 @@ def update_first_graph(sport, graph):
 
 
 # Controlling elements for second graph
-@app.callback(Output("sweden-medal-graph", "figure"), Input("game-picker", "value"))
+@app.callback(
+    Output("sweden-medal-graph", "figure"),
+    Input("game-picker", "value") 
+)
+
 def update_second_graph(season):
     return total_medels_os(season)
-
 
 if __name__ == "__main__":
     app.run_server(debug=True)
