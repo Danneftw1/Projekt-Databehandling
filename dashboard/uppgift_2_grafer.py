@@ -12,38 +12,41 @@ noc_regions = pd.read_csv("../Projekt-Databehandling/Data/noc_regions.csv")
 #-------------------------------------------------------------------------------------------------------------------------------------
 
 def medal_distribution_per_sport(sport, df):
-
+    # find all columns with x sport
     sports_olympics = df[(df["Sport"] == sport)]
 
+    # creates 3 dataframes with all medal-types
     bronze_medal = sports_olympics[(sports_olympics["Medal"] == "Bronze")]
     silver_medal = sports_olympics[(sports_olympics["Medal"] == "Silver")]
     gold_medal = sports_olympics[(sports_olympics["Medal"] == "Gold")]
 
+    # count the amount of each medal types for each dataframe
     bronze_medal = (
         bronze_medal.groupby(["Team"])["Medal"]
         .count()
-        .reset_index(name="Bronze") # new name for medal column
+        .reset_index(name="Bronze")
         .sort_values(["Bronze"], ascending=False)
     )
 
     silver_medal = (
         silver_medal.groupby(["Team"])["Medal"]
         .count()
-        .reset_index(name="Silver") # new name for medal column
+        .reset_index(name="Silver")
         .sort_values(["Silver"], ascending=False)
     )
 
     gold_medal = (
         gold_medal.groupby(["Team"])["Medal"]
         .count()
-        .reset_index(name="Gold") # new name for medal column
+        .reset_index(name="Gold")
         .sort_values(["Gold"], ascending=False)
     )
 
     medal_total = [gold_medal, silver_medal ,bronze_medal]
     # Added a lambda function in order to merge 3 dataframes with only needed columns
+    # Source for lambda function: https://stackoverflow.com/questions/23668427/pandas-three-way-joining-multiple-dataframes-on-columns
     df_final = ft.reduce(lambda left, right: pd.merge(left, right), medal_total)
-    # Creates a sum column with total medal sum, only for sorting purpose
+    # Creates a sum column with total medal sum, only for sorting purposes
     df_final['Sum'] = df_final.sum(axis=1)
     # sort by 'sum' column - highest to lowest
     df_final.sort_values(by='Sum', ascending=False, inplace=True)
@@ -68,9 +71,7 @@ def medal_distribution_per_sport(sport, df):
         title=f'Top Countries With Most Medals won in {sport}',
     )
     newnames = sublabels
-    # To be able to change the sub titles for 'Antal doser' without changing the data source,
-    # you can switch the legendgroups name with a dict and map it onto existing subtitle names.
-    # I had to do this since I couldn't change it through 'labels=' like the other titles
+    # Re-used a bit of code from my Labb 1, the original source is below.
     # source: https://stackoverflow.com/questions/64371174/plotly-how-to-change-variable-label-names-for-the-legend-in-a-plotly-express-li
     fig.for_each_trace(lambda t: t.update(name=newnames[t.name]))
 
@@ -106,6 +107,9 @@ def most_medals_per_country_sports(sport, df):
 def amount_of_athlets(sport, df):
     df_sport = df[(df['Sport'] == sport)]
 
+    # To plot the amount of athletes i used this source:
+    # https://www.kaggle.com/code/gpreda/plotly-tutorial-120-years-of-olympic-games/notebook
+    # I cannot explictly remember what part of the page this bit of code came from, however I was inspired by one of the examples
     tmp = df_sport.groupby(['Year', 'City'])['Season'].value_counts()
     df_sport = pd.DataFrame(data={'Athlets': tmp.values}, index=tmp.index).reset_index()
 
