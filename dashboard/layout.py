@@ -36,7 +36,7 @@ class Layout:
                                 dbc.Col([dbc.NavbarBrand("Sweden")]),
                             ]
                         ),
-                    ]
+                    ],
                 ),
                 dbc.Row(
                     children=[
@@ -87,7 +87,8 @@ class Layout:
                                                                                                         options=self._sub_options_dropdown,
                                                                                                         value="Medals Won",
                                                                                                     ),  # open-high-low-close(options)
-                                                                                                ], id= "radio-col"
+                                                                                                ],
+                                                                                                id="radio-col",
                                                                                             )
                                                                                         ]
                                                                                     ),
@@ -106,25 +107,54 @@ class Layout:
                                                     ),
                                                 ],
                                                 className="right-Columns",
-                                                
                                             ),
                                             dbc.Col(
                                                 [
-                                                    dbc.Card(
+                                                    dbc.Row(
                                                         [
-                                                            dbc.CardBody(
+                                                            dbc.Col(
                                                                 [
-                                                                    dcc.Graph(
-                                                                        id="pie_Chart", figure= sex_distribution(), 
-                                                                    ),
+                                                                    dbc.Card(
+                                                                        [
+                                                                            dbc.CardBody(
+                                                                                [
+                                                                                    dcc.Graph(
+                                                                                        id="pie_Chart",
+                                                                                        figure=sex_distribution(),
+                                                                                    ),
+                                                                                ]
+                                                                            )
+                                                                        ],
+                                                                        className="medium-Card",
+                                                                    )
                                                                 ]
                                                             )
-                                                        ],
-                                                        className="medium-Card",
-                                                    )
+                                                        ]
+                                                    ),
+                                                    dbc.Row(
+                                                        [
+                                                            dbc.Col(
+                                                                [
+                                                                    dbc.Card(
+                                                                        [
+                                                                            dbc.CardBody(
+                                                                                [
+                                                                                     dcc.Graph(
+                                                                                        id="age_Chart",
+                                                                                        figure=age_distribution(),
+                                                                                    ),
+                                                                                ]
+                                                                            )
+                                                                        ],
+                                                                        className="small-Card",
+                                                                    )
+                                                                ]
+                                                            ),
+                                                        ]
+                                                    ),
                                                 ],
                                                 lg=4,
-                                                xl=4, 
+                                                xl=4,
                                                 md=12,
                                                 sm=12,
                                             ),
@@ -170,9 +200,8 @@ class Layout:
                                                         className="big-Card",
                                                     ),
                                                 ],
-                                                className="right-Columns", 
+                                                className="right-Columns",
                                             ),
-
                                             dbc.Col(
                                                 [
                                                     dbc.Card(
@@ -180,7 +209,7 @@ class Layout:
                                                             dbc.CardBody(
                                                                 [
                                                                     dcc.Graph(
-                                                                        id= "graph-4" 
+                                                                        id="graph-4"
                                                                     ),
                                                                 ]
                                                             )
@@ -189,11 +218,10 @@ class Layout:
                                                     )
                                                 ],
                                                 lg=4,
-                                                xl=4, 
+                                                xl=4,
                                                 md=12,
                                                 sm=12,
                                             ),
-
                                         ]
                                     ),
                                 ],

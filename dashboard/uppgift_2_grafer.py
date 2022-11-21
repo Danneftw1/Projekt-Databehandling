@@ -99,7 +99,14 @@ def most_medals_per_country_sports(sport, df):
         title=f'Amount of Medals Per Country for {sport}'
         
     )
-    # fig.update_xaxes(tickangle=40)
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+    )
+
+    fig.update_traces(marker_color="#185ADB")
+
     return fig
 
 
@@ -118,5 +125,12 @@ def amount_of_athlets(sport, df):
             title='Amount of athlets for '+sport+' Each Olympics',
             
     )
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+    )
+
+    fig.update_traces(marker_color="#185ADB")
 
     return fig
