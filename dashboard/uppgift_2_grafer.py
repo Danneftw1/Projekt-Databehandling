@@ -134,3 +134,4 @@ def amount_of_athlets(sport, df):
     fig.update_traces(marker_color="#185ADB")
 
     return fig
+    

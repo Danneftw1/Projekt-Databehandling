@@ -87,7 +87,7 @@ def total_medels_os(value):
         y=columns[int(value)],
         barmode="group",
         title=titels[int(value)],
-        
+        color_discrete_sequence=['#FFC947', '#185ADB']
     )
 
     fig.update_layout(

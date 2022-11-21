@@ -184,7 +184,7 @@ class Layout:
                                                                                         className="dropdown",
                                                                                         id="game-picker",
                                                                                         options=self._game_dict,
-                                                                                        value="1",
+                                                                                        value="0",
                                                                                     ),
                                                                                 ]
                                                                             ),

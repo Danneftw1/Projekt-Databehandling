@@ -11,8 +11,6 @@ body {
 /* ################################ */
 /* Header */
 
-
-
 header {
     width: 100;
     padding: 0.5rem 0;
@@ -127,6 +125,9 @@ h2 {
     margin-top: 5px;
 }
 
+/* ################################ */
+/* Graphs */
+
 #pie_Chart {
     /* width: 94%; */
     max-width: 98%;
@@ -150,6 +151,7 @@ h2 {
 
 #athlete-medal-graph {
     width: 100%;
+    
 }
 
 
