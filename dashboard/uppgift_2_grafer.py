@@ -50,7 +50,7 @@ def medal_distribution_per_sport(sport, df):
     df_final['Sum'] = df_final.sum(axis=1)
     # sort by 'sum' column - highest to lowest
     df_final.sort_values(by='Sum', ascending=False, inplace=True)
-
+    df_final = df_final.head(10)
     labels = {
         "value": "Medals won",
         "variable": "Medals",
