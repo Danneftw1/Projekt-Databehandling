@@ -1,6 +1,7 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 from uppgift_1_grafer import *
+from övriga_grafer import *
 
 
 class Layout:
@@ -127,7 +128,7 @@ class Layout:
                                                                         ],
                                                                         className="medium-Card",
                                                                     )
-                                                                ]
+                                                                ],
                                                             )
                                                         ]
                                                     ),
@@ -148,7 +149,7 @@ class Layout:
                                                                         ],
                                                                         className="small-Card",
                                                                     )
-                                                                ]
+                                                                ],
                                                             ),
                                                         ]
                                                     ),
@@ -198,6 +199,7 @@ class Layout:
                                                             ),
                                                         ],
                                                         className="big-Card",
+                                                        id="big-Card-2",
                                                     ),
                                                 ],
                                                 className="right-Columns",
@@ -209,18 +211,46 @@ class Layout:
                                                             dbc.CardBody(
                                                                 [
                                                                     dcc.Graph(
-                                                                        id="graph-4"
+                                                                        figure=sports_medals_sweden_piechart(
+                                                                            "Sweden",
+                                                                            df_data,
+                                                                        ),
+                                                                        id="pie-Chart-medals",
                                                                     ),
                                                                 ]
                                                             )
                                                         ],
-                                                        className="medium-Card",
+                                                        className="medium-Card", id= "medium-Card-2"
                                                     )
                                                 ],
                                                 lg=4,
                                                 xl=4,
                                                 md=12,
                                                 sm=12,
+                                            ),
+                                        ]
+                                    ),
+                                    dbc.Row(
+                                        [
+                                            dbc.Col(
+                                                [
+                                                    dbc.Card(
+                                                        [
+                                                            dbc.CardBody(
+                                                                [
+                                                                    dcc.Graph(
+                                                                        figure=treemap_most_x_medals_won(
+                                                                            "Gold",
+                                                                            df_data,
+                                                                        ),
+                                                                        
+                                                                    ),
+                                                                ]
+                                                            ),
+                                                        ],
+                                                        className="big-Card", id="Tree-Card"
+                                                    )
+                                                ]
                                             ),
                                         ]
                                     ),
