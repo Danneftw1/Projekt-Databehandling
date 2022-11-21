@@ -139,7 +139,7 @@ class Layout:
                                                                         [
                                                                             dbc.CardBody(
                                                                                 [
-                                                                                     dcc.Graph(
+                                                                                    dcc.Graph(
                                                                                         id="age_Chart",
                                                                                         figure=age_distribution(),
                                                                                     ),
