@@ -69,6 +69,7 @@ def medal_distribution_per_sport(sport, df):
         barmode="group",  # groups the bars next to eachother instead of stacking on eachother
         labels=labels,
         title=f'Top Countries With Most Medals won in {sport}',
+        color_discrete_sequence=['#FFD700', '#8C8C8C', '#BF834E'] # gold, silver & bronze
     )
     newnames = sublabels
     # Re-used a bit of code from my Labb 1, the original source is below.
