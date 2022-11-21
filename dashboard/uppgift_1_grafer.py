@@ -77,9 +77,9 @@ def total_medels_os(value):
 
     # Titels and column names
     titels = [
-        "Total number of medals per OS",
-        "Total number of medals per summer OS",
-        "Total number of medals per winter OS",
+        "Total Number of Medals Per OS",
+        "Total Number of Medals Per Summer OS",
+        "Total Number of Medals Per Winter OS",
     ]
     columns = [["Summer medals", "Winter medals"], "Summer medals", "Winter medals"]
 
@@ -117,7 +117,7 @@ def age_distribution():
     )
 
     # Plots the histogram
-    fig = px.histogram(df_age, x="Age", title="OS age distribution in Sweden")
+    fig = px.histogram(df_age, x="Age", title="OS Age Distribution in Swedish Athlets")
     fig.update_layout(
         yaxis_title="Number",
         margin=dict(t=30, b=0, l=0, r=0),
@@ -150,7 +150,7 @@ def sex_distribution():
         df_swe_sex,
         names=df_swe_sex.index,
         values="Sex",
-        title="Total gender distribution in Sweden",
+        title="Total Gender Distribution in Swedish Athlets",
         color=df_swe_sex.index,
         color_discrete_map={
             "M": "#185ADB",

@@ -125,7 +125,7 @@ def amount_of_athlets(sport, df):
             x='Year',
             y='Athlets',
             size='Year',
-            title=f'Amount of athlets for {sport} Each Olympics',
+            title=f'Amount of Athlets for {sport} Each Olympics',
             
     )
 
