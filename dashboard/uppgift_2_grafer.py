@@ -3,80 +3,80 @@ import plotly_express as px
 import numpy as np
 import matplotlib.pyplot as plt
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+# import tool for lambda func (used on line 44)
+import functools as ft
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 noc_regions = pd.read_csv("../Projekt-Databehandling/Data/noc_regions.csv")
 
-def medal_distribution():
+#-------------------------------------------------------------------------------------------------------------------------------------
 
-    ski_jumping = athlete_events[(athlete_events["Sport"] == "Ski Jumping")]
+def medal_distribution_per_sport(sport, df):
+    # find all columns with x sport
+    sports_olympics = df[(df["Sport"] == sport)]
 
-    skiing_olympics = (
-        ski_jumping.groupby(["Team"])["Medal"]
+    # creates 3 dataframes with all medal-types
+    bronze_medal = sports_olympics[(sports_olympics["Medal"] == "Bronze")]
+    silver_medal = sports_olympics[(sports_olympics["Medal"] == "Silver")]
+    gold_medal = sports_olympics[(sports_olympics["Medal"] == "Gold")]
+
+    # count the amount of each medal types for each dataframe
+    bronze_medal = (
+        bronze_medal.groupby(["Team"])["Medal"]
         .count()
-        .reset_index(name="Count") # new name for medal column
-        .sort_values(["Count"], ascending=False)
+        .reset_index(name="Bronze")
+        .sort_values(["Bronze"], ascending=False)
     )
 
-    skiing_olympics.head(3)
-
-    top_countries_medals = ski_jumping[(ski_jumping["Team"] == "Austria") | (ski_jumping["Team"] == "Norway") | (ski_jumping["Team"] == "Finland")]
-
-    bronze_ski_jumping = top_countries_medals[(top_countries_medals["Medal"] == "Bronze")]
-    silver_ski_jumping = top_countries_medals[(top_countries_medals["Medal"] == "Silver")]
-    gold_ski_jumping = top_countries_medals[(top_countries_medals["Medal"] == "Gold")]
-
-    medals_per_country = ski_jumping.groupby("Team")["Medal"].value_counts(dropna=True)
-    bronze_ski_jumping = bronze_ski_jumping.groupby("Team")["Medal"].value_counts(
-        dropna=False
+    silver_medal = (
+        silver_medal.groupby(["Team"])["Medal"]
+        .count()
+        .reset_index(name="Silver")
+        .sort_values(["Silver"], ascending=False)
     )
-    silver_ski_jumping = silver_ski_jumping.groupby("Team")["Medal"].value_counts(
-        dropna=False
+
+    gold_medal = (
+        gold_medal.groupby(["Team"])["Medal"]
+        .count()
+        .reset_index(name="Gold")
+        .sort_values(["Gold"], ascending=False)
     )
-    gold_ski_jumping = gold_ski_jumping.groupby("Team")["Medal"].value_counts(dropna=False)
 
-
-    def plotly_bar_plot_with_labels_sublabels(
-        x, y, title, labels, sublabels,
-    ):
-
-        fig = px.bar(
-            x=x,
-            y=y,
-            barmode="group",  # groups the bars next to eachother instead of stacking on eachother
-            labels=labels,
-            title=title,
-        )
-        newnames = sublabels
-        # To be able to change the sub titles for 'Antal doser' without changing the data source,
-        # you can switch the legendgroups name with a dict and map it onto existing subtitle names.
-        # I had to do this since I couldn't change it through 'labels=' like the other titles
-        # source: https://stackoverflow.com/questions/64371174/plotly-how-to-change-variable-label-names-for-the-legend-in-a-plotly-express-li
-        fig.for_each_trace(lambda t: t.update(name=newnames[t.name]))
-
-        fig.show()
-
-
-    labels_skiing = {
+    medal_total = [gold_medal, silver_medal ,bronze_medal]
+    # Added a lambda function in order to merge 3 dataframes with only needed columns
+    # Source for lambda function: https://stackoverflow.com/questions/23668427/pandas-three-way-joining-multiple-dataframes-on-columns
+    df_final = ft.reduce(lambda left, right: pd.merge(left, right), medal_total)
+    # Creates a sum column with total medal sum, only for sorting purposes
+    df_final['Sum'] = df_final.sum(axis=1)
+    # sort by 'sum' column - highest to lowest
+    df_final.sort_values(by='Sum', ascending=False, inplace=True)
+    df_final = df_final.head(10)
+    labels = {
         "value": "Medals won",
         "variable": "Medals",
         "x": "Teams",
     }
 
-    sublabels_skiing = {
-        "wide_variable_0": "Bronze",
+    sublabels = {
+        "wide_variable_0": "Gold",
         "wide_variable_1": "Silver",
-        "wide_variable_2": "Gold",
+        "wide_variable_2": "Bronze",
     }
 
-    plotly_bar_plot_with_labels_sublabels(
-        top_countries_medals.Team.unique(),
-        [bronze_ski_jumping, silver_ski_jumping, gold_ski_jumping],
-        'Top 3 Countries With Most Medals won in Ski Jumping',
-        labels_skiing,
-        sublabels_skiing
+    fig = px.bar(
+        x=df_final["Team"],
+        y=[df_final["Gold"], df_final["Silver"], df_final["Bronze"]],
+        barmode="group",  # groups the bars next to eachother instead of stacking on eachother
+        labels=labels,
+        title=f'Top Countries With Most Medals won in {sport}',
+        color_discrete_sequence=['#FFD700', '#8C8C8C', '#BF834E'] # gold, silver & bronze
     )
+    newnames = sublabels
+    # Re-used a bit of code from my Labb 1, the original source is below.
+    # source: https://stackoverflow.com/questions/64371174/plotly-how-to-change-variable-label-names-for-the-legend-in-a-plotly-express-li
+    fig.for_each_trace(lambda t: t.update(name=newnames[t.name]))
 
+    return fig
 
 #--------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -108,6 +108,9 @@ def most_medals_per_country_sports(sport, df):
 def amount_of_athlets(sport, df):
     df_sport = df[(df['Sport'] == sport)]
 
+    # To plot the amount of athletes i used this source:
+    # https://www.kaggle.com/code/gpreda/plotly-tutorial-120-years-of-olympic-games/notebook
+    # I cannot explictly remember what part of the page this bit of code came from, however I was inspired by one of the examples
     tmp = df_sport.groupby(['Year', 'City'])['Season'].value_counts()
     df_sport = pd.DataFrame(data={'Athlets': tmp.values}, index=tmp.index).reset_index()
 
@@ -115,7 +118,7 @@ def amount_of_athlets(sport, df):
             x='Year',
             y='Athlets',
             size='Year',
-            title='Amount of athlets for '+sport+' Each Olympics',
+            title=f'Amount of athlets for {sport} Each Olympics',
             
     )
 
