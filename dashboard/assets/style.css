@@ -1,0 +1,157 @@
+body {
+    background-color: #F6F6F6;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
+    background-color: #EFEFEF;
+}
+
+/* ################################ */
+/* Header */
+
+header {
+    width: 100;
+    padding: 0.5rem 0;
+}
+
+h1 {
+    margin-left: 2rem;
+    color: black;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+/* ################################ */
+/* Containers */
+
+#Container-1 {
+
+    /* height: 90vh; */
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#Container-2 {
+    height: 100vh;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+/* ################################ */
+/* Rows */
+
+.row {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* ################################ */
+/* Columns */
+
+.right-Columns {
+    padding: 0px;
+}
+
+.side-Columns {
+    padding: 0px;
+
+}
+
+/* ################################ */
+/* Cards */
+
+.small-Card {
+    margin: 5vh;
+    margin-top: 0.5vh;
+    height: 26vh;
+    border-radius: 10px;
+    background-color: #F6F6F6;
+    border-color: #185ADB;
+}
+
+.medium-Card {
+    margin: 5vh;
+    margin-top: 5vh;
+    margin-bottom: 2.5vh;
+    height: 45vh;
+    border-radius: 10px;
+    background-color: #F6F6F6;
+    border-color: #185ADB;
+}
+
+.big-Card {
+    margin: 2vh;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    margin-top: 5vh;
+    color: black;
+    border-radius: 10px;
+    background-color: #F6F6F6;
+    border-color: #185ADB;
+}
+
+.row-shadow {
+    box-shadow: 1px 0px #185ADB;
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+
+/* ################################ */
+/* Dropdown */
+
+.dropdown {
+    /* margin-left: 8%; */
+    margin-bottom: 2%;
+    width: 100%;
+}
+
+/* ################################ */
+/* Radio buttons*/
+
+.radio-button label {
+    margin-right: 10px;
+}
+
+.radio-button label input {
+    margin-right: 10px;
+}
+
+#radio-col {
+    margin-top: 5px;
+}
+
+/* ################################ */
+/* Graphs */
+
+#pie_Chart {
+    /* width: 94%; */
+    max-width: 98%;
+    height: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+    display: inline-block;
+}
+
+#age_Chart {
+    height: 98%;
+}
+
+#graph-4 {
+    width: 96%;
+    height: 98%;
+    margin-left: 3%;
+    margin-right: 1%;
+    display: inline-block;
+}
+
+#athlete-medal-graph {
+    width: 100%;
+    
+}
+
+
