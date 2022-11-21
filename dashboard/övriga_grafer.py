@@ -6,29 +6,29 @@ athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv"
 # ---------------------------------------------------------------------------------------------------------------------------------------------
 # From uppgift 0, made into a treemap and we can change which medal we want to plot
 def treemap_most_x_medals_won(medal, df):
-    gold_athlete = df[(df["Medal"] == medal)].dropna()
-    # gold_athlete = gold_athlete[['Team', 'Medal']].sort_values(by=['Team'])
-    gold_athlete = (
-        gold_athlete.groupby(["Team"])["Medal"]
-        .count()
-        .reset_index(name="Count")
-        .sort_values(["Count"], ascending=False)
+    athlete_medals = (
+        df.groupby(["Games", "Event", "Medal", "Team"])
+        .sum(numeric_only=False)
+        .reset_index()
     )
-
+    # sorts the gold medals
+    gold_medals = athlete_medals[["Team", "Medal"]].loc[
+        athlete_medals["Medal"] == medal
+    ]
+    gold_medals = (
+        gold_medals.groupby("Team")
+        .count()
+        .sort_values("Medal", ascending=False)
+        .reset_index()
+    )
     fig = px.treemap(
-        gold_athlete.head(30),
+        gold_medals.head(30),
         path=["Team"],
-        values="Count",
-        color="Count",
+        values="Medal",
+        color="Medal",
         hover_data=["Team"],
         title=f"Top 30 Countries With Most {medal} Medals Won",
     )
-
-    fig.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)",
-    )
-
     return fig
 
 

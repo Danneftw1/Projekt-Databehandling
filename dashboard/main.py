@@ -9,6 +9,7 @@ from uppgift_2_grafer import *
 from uppgift_1_grafer import *
 from hash_data import Hash_DataFrame as hd
 from layout import Layout
+from övriga_grafer import *
 
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
@@ -25,6 +26,13 @@ sport_dict = {
 }
 game_dict = {"0": "Summer & Winter", "1": "Summer", "2": "Winter"}
 
+# sub options for treemap
+# treemap_medal_dict = {
+#     "Bronze": "Bronze",
+#     "Silver": "Silver",
+#     "Gold": "Gold"
+# }
+
 # variable names:
 dropdown_options_medals_athlets = [
     {"label": name, "value": sport} for sport, name in sport_dict.items()
@@ -36,6 +44,11 @@ sub_options_dropdown = [
     {"label": option, "value": option}
     for option in ("Medals Won", "Amount of Athlets", "Medal Distribution")
 ]
+
+# sub_options_treemap = [
+#     {"label": option, "value": option}
+#     for option in ("Bronze", "Silver", "Gold")
+# ]
 
 # Creates the Dash app
 app = dash.Dash(
@@ -99,6 +112,21 @@ def update_first_graph(sport, graph):
 def update_second_graph(season):
     return total_medels_os(season)
 
+# @app.callback(
+#     Output("Container-1", "figure"),
+#     # Behöver lägga in en ny variabel
+#     Input()
+# )
+
+# def update_treemap_graph(medal):
+#     if medal == "Gold":
+#         return treemap_most_x_medals_won(medal, athlete_events)
+    
+#     elif medal == "Silver":
+#         return treemap_most_x_medals_won(medal, athlete_events)
+    
+#     elif medal == "Bronze":
+#         return treemap_most_x_medals_won(medal, athlete_events)
 
 if __name__ == '__main__':
     app.run_server(debug = True)
