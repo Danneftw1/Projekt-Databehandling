@@ -5,7 +5,7 @@ import plotly_express as px
 import pandas as pd
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from uppgift_2_grafer import most_medals_per_country_sports, amount_of_athlets
+from uppgift_2_grafer import *
 from uppgift_1_grafer import *
 from hash_data import Hash_DataFrame as hd
 from layout import Layout
@@ -13,13 +13,29 @@ from layout import Layout
 
 athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
 athlete_events = hd.hash_Columns(athlete_events, ["Name"])
-sport_dict = {'Ski Jumping': 'Ski Jumping', 'Snowboarding': 'Snowboarding', 'Football': 'Football', 'Bobsleigh': 'Bobsleigh'}
-game_dict = {"0" : 'Summer & Winter', "1" : 'Summer', "2" : 'Winter'}
+
+# dropdown menu name variables:
+sport_dict = {
+    "Biathlon": "Biathlon",
+    "Snowboarding": "Snowboarding",
+    "Alpine Skiing": "Alpine Skiing",
+    "Freestyle Skiing": "Freestyle Skiing",
+    "Boxing": "Boxing",
+    "Weightlifting": "Weightlifting",
+}
+game_dict = {"0": "Summer & Winter", "1": "Summer", "2": "Winter"}
 
 # variable names:
-dropdown_options_medals_athlets = [{'label': name, 'value': sport} for sport, name in sport_dict.items()]
-dropdown_options_sweden_medals = [{'label': name, 'value': season} for season, name in game_dict.items()]
-sub_options_dropdown = [{'label': option, 'value': option} for option in ('Medals Won', 'Amount of Athlets')]
+dropdown_options_medals_athlets = [
+    {"label": name, "value": sport} for sport, name in sport_dict.items()
+]
+dropdown_options_sweden_medals = [
+    {"label": name, "value": season} for season, name in game_dict.items()
+]
+sub_options_dropdown = [
+    {"label": option, "value": option}
+    for option in ("Medals Won", "Amount of Athlets", "Medal Distribution")
+]
 
 # Creates the Dash app
 app = dash.Dash(
@@ -55,23 +71,29 @@ app.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_med
 
 # To control our element that we've created
 @app.callback(
-    Output('athlete-medal-graph', 'figure'),
-    Input('sportpicker-dropdown', 'value'),
-    Input('sub-options-dropdown', 'value'),
+    Output("athlete-medal-graph", "figure"),
+    Input("sportpicker-dropdown", "value"),
+    Input("sub-options-dropdown", "value"),
 )
 
+# all graphs are functions from other .py-files that are just imported into main.py
+# makes main.py much easier to read code-wise
 def update_first_graph(sport, graph):
-    # if-statements for sub-options-
-    if graph == 'Amount of Athlets':
+    # if-statements for sub-options-dropdown
+    if graph == "Amount of Athlets":
         return amount_of_athlets(sport, athlete_events)
 
-    elif graph == 'Medals Won':
+    elif graph == "Medals Won":
         return most_medals_per_country_sports(sport, athlete_events)
+
+    elif graph == "Medal Distribution":
+        return medal_distribution_per_sport(sport, athlete_events)
+
 
 # Controlling elements for second graph
 @app.callback(
-    Output('sweden-medal-graph', 'figure'),
-    Input('game-picker', 'value')
+    Output("sweden-medal-graph", "figure"),
+    Input("game-picker", "value") 
 )
 
 def update_second_graph(season):

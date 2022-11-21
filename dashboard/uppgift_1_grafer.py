@@ -11,6 +11,7 @@ df_data = pd.read_csv(file_path)
 # encrypt the athletes names. TODO check why error message is not working.
 df_data = hd.hash_Columns(df_data, ["Name"])
 
+#---------------------------------------------------------------------------------------------------------------------------------------------
 
 def sport_medals():
 
@@ -43,8 +44,9 @@ def sport_medals():
 
     return fig
 
+#---------------------------------------------------------------------------------------------------------------------------------------------
 
-def total_medels_os(value):
+def total_medels_os(value): 
     # antal medaljer per OS
 
     # get all swe data from dataframe
@@ -98,6 +100,7 @@ def total_medels_os(value):
 
     return fig
 
+#---------------------------------------------------------------------------------------------------------------------------------------------
 
 def age_distribution():
 
@@ -127,6 +130,7 @@ def age_distribution():
 
     return fig
 
+#---------------------------------------------------------------------------------------------------------------------------------------------
 
 def sex_distribution():
 
