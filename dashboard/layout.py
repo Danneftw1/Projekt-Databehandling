@@ -11,12 +11,14 @@ class Layout:
         dropdown_options_sweden_medals,
         sub_options_dropdown,
         game_dict,
+        treemap_medal_dict,
     ) -> None:
 
         self._dropdown_options_medals_athlets = dropdown_options_medals_athlets
         self._dropdown_options_sweden_medals = dropdown_options_sweden_medals
         self._sub_options_dropdown = sub_options_dropdown
         self._game_dict = game_dict
+        self._treemap_medal_dict = treemap_medal_dict
 
     def layout(self):
 
@@ -220,7 +222,8 @@ class Layout:
                                                                 ]
                                                             )
                                                         ],
-                                                        className="medium-Card", id= "medium-Card-2"
+                                                        className="medium-Card",
+                                                        id="medium-Card-2",
                                                     )
                                                 ],
                                                 lg=4,
@@ -238,17 +241,36 @@ class Layout:
                                                         [
                                                             dbc.CardBody(
                                                                 [
-                                                                    dcc.Graph(
-                                                                        figure=treemap_most_x_medals_won(
-                                                                            "Gold",
-                                                                            df_data,
-                                                                        ),
-                                                                        
+                                                                    dbc.Row(
+                                                                        [
+                                                                            dbc.Col(
+                                                                                [
+                                                                                    dcc.RadioItems(
+                                                                                        id="treemap_buttons",
+                                                                                        options=self._treemap_medal_dict,
+                                                                                        value="Gold",
+                                                                                        className="radiobuttons",
+                                                                                    )
+                                                                                ]
+                                                                            )
+                                                                        ]
+                                                                    ),
+                                                                    dbc.Row(
+                                                                        [
+                                                                            dbc.Col(
+                                                                                [
+                                                                                    dcc.Graph(
+                                                                                        id="treemap_graph"
+                                                                                    ),
+                                                                                ]
+                                                                            )
+                                                                        ]
                                                                     ),
                                                                 ]
                                                             ),
                                                         ],
-                                                        className="big-Card", id="Tree-Card"
+                                                        className="big-Card",
+                                                        id="Tree-Card",
                                                     )
                                                 ]
                                             ),
