@@ -124,6 +124,9 @@ def age_distribution():
         title_x=0.5,
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(
+            size=10,
+        ),
     )
 
     fig.update_traces(marker_color="#185ADB")
