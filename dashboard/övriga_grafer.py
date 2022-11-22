@@ -29,6 +29,11 @@ def treemap_most_x_medals_won(medal, df):
         hover_data=["Team"],
         title=f"Top 30 Countries With Most {medal} Medals Won",
     )
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)"
+    )
+
     return fig
 
 

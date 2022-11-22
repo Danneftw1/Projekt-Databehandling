@@ -68,13 +68,18 @@ def medal_distribution_per_sport(sport, df):
         y=[df_final["Gold"], df_final["Silver"], df_final["Bronze"]],
         barmode="group",  # groups the bars next to eachother instead of stacking on eachother
         labels=labels,
-        title=f'Top Countries With Most Medals won in {sport}',
+        title=f'Top Countries With Most Medals Won in {sport}',
         color_discrete_sequence=['#FFD700', '#8C8C8C', '#BF834E'] # gold, silver & bronze
     )
     newnames = sublabels
     # Re-used a bit of code from my Labb 1, the original source is below.
     # source: https://stackoverflow.com/questions/64371174/plotly-how-to-change-variable-label-names-for-the-legend-in-a-plotly-express-li
     fig.for_each_trace(lambda t: t.update(name=newnames[t.name]))
+
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)"
+    )
 
     return fig
 

@@ -163,7 +163,7 @@ def sex_distribution():
         plot_bgcolor="rgba(0,0,0,0)",
         title_x=0.5,
         font=dict(
-            size=12,
+            size=10,
         ),
         legend=dict(orientation="h"),
     )
