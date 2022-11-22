@@ -12,7 +12,7 @@ from layout import Layout
 from övriga_grafer import *
 
 
-athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
+athlete_events = pd.read_csv("Data/athlete_events.csv")
 athlete_events = hd.hash_Columns(athlete_events, ["Name"])
 
 # dropdown menu name variables:

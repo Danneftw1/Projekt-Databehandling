@@ -6,8 +6,8 @@ from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 # import tool for lambda func (used on line 44)
 import functools as ft
 
-athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
-noc_regions = pd.read_csv("../Projekt-Databehandling/Data/noc_regions.csv")
+athlete_events = pd.read_csv("Data/athlete_events.csv")
+noc_regions = pd.read_csv("Data/noc_regions.csv")
 
 #-------------------------------------------------------------------------------------------------------------------------------------
 

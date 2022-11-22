@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly_express as px
 
-athlete_events = pd.read_csv("../Projekt-Databehandling/Data/athlete_events.csv")
+athlete_events = pd.read_csv("Data/athlete_events.csv")
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------
 # From uppgift 0, made into a treemap and we can change which medal we want to plot
