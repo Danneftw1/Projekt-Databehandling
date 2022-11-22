@@ -65,6 +65,7 @@ def sports_medals_sweden_piechart(country, df):
         values="Medal",
         names="Sport",
         title=f"Sports With Most Amount of Medals For {country}",
+        color_discrete_sequence=['#185ADB', '#0B2761', '#195BE0', '#1A60ED', '#1651C7', '#FFC947', '#614C1B', '#E0B03F', '#EDBA42', '#C79C38']
     )
     fig.update_layout(
         margin=dict(t=30, b=0, l=0, r=0),

@@ -138,6 +138,19 @@ h2 {
     margin-top: 5px;
 }
 
+#treemap_buttons {
+    float: right;
+    margin-top: 5px;
+}
+
+#treemap_buttons label {
+    margin-right: 10px;
+}
+
+#treemap_buttons label input {
+    margin-right: 10px;
+}
+
 /* ################################ */
 /* Graphs */
 
