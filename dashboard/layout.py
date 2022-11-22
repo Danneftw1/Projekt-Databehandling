@@ -251,8 +251,8 @@ class Layout:
                                                                                         value="Gold",
                                                                                         className="radiobuttons",
                                                                                     )
-                                                                                ]
-                                                                            )
+                                                                                ],className="row-shadow", align= "End"
+                                                                            ),
                                                                         ]
                                                                     ),
                                                                     dbc.Row(
