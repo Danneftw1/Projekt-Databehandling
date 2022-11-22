@@ -21,6 +21,7 @@ dash = "*"
 dash-bootstrap-components = "*"
 pandas = "*"
 numpy = "*"
+gunicorn = "*"
 
 [dev-packages]
 

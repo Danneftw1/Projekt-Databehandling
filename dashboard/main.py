@@ -127,7 +127,7 @@ def update_treemap_graph(medal):
         return treemap_most_x_medals_won(medal, athlete_events)
 
 if __name__ == '__main__':
-    app.run_server(debug = True)
+    app.run_server(debug = False)
 
 
 
