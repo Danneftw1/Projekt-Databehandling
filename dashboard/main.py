@@ -57,6 +57,7 @@ app = dash.Dash(
 )
 
 app.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_medals, sub_options_dropdown, game_dict, treemap_medal_dict).layout()
+server = app.server
 
 # Set up the app layout
 # app.layout = html.Main([
