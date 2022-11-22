@@ -26,12 +26,11 @@ sport_dict = {
 }
 game_dict = {"0": "Summer & Winter", "1": "Summer", "2": "Winter"}
 
-# sub options for treemap
-# treemap_medal_dict = {
-#     "Bronze": "Bronze",
-#     "Silver": "Silver",
-#     "Gold": "Gold"
-# }
+treemap_medal_dict = {
+    "Gold": "Gold",
+    "Silver": "Silver",
+    "Bronze": "Bronze"
+}
 
 # variable names:
 dropdown_options_medals_athlets = [
@@ -45,10 +44,10 @@ sub_options_dropdown = [
     for option in ("Medals Won", "Amount of Athlets", "Medal Distribution")
 ]
 
-# sub_options_treemap = [
-#     {"label": option, "value": option}
-#     for option in ("Bronze", "Silver", "Gold")
-# ]
+sub_options_treemap = [
+    {"label": option, "value": option}
+    for option in ("Gold", "Silver", "Bronze")
+]
 
 # Creates the Dash app
 app = dash.Dash(
@@ -57,7 +56,7 @@ app = dash.Dash(
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
 
-app.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_medals, sub_options_dropdown, game_dict).layout()
+app.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_medals, sub_options_dropdown, game_dict, treemap_medal_dict).layout()
 
 # Set up the app layout
 # app.layout = html.Main([
@@ -112,21 +111,20 @@ def update_first_graph(sport, graph):
 def update_second_graph(season):
     return total_medels_os(season)
 
-# @app.callback(
-#     Output("Container-1", "figure"),
-#     # Behöver lägga in en ny variabel
-#     Input()
-# )
+@app.callback(
+    Output("treemap_graph", "figure"),
+    Input("treemap_buttons", "value")
+)
 
-# def update_treemap_graph(medal):
-#     if medal == "Gold":
-#         return treemap_most_x_medals_won(medal, athlete_events)
+def update_treemap_graph(medal):
+    if medal == "Gold":
+        return treemap_most_x_medals_won(medal, athlete_events)
     
-#     elif medal == "Silver":
-#         return treemap_most_x_medals_won(medal, athlete_events)
+    elif medal == "Silver":
+        return treemap_most_x_medals_won(medal, athlete_events)
     
-#     elif medal == "Bronze":
-#         return treemap_most_x_medals_won(medal, athlete_events)
+    elif medal == "Bronze":
+        return treemap_most_x_medals_won(medal, athlete_events)
 
 if __name__ == '__main__':
     app.run_server(debug = True)
