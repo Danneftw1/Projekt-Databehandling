@@ -59,29 +59,6 @@ app = dash.Dash(
 app.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_medals, sub_options_dropdown, game_dict, treemap_medal_dict).layout()
 server = app.server
 
-# Set up the app layout
-# app.layout = html.Main([
-#     #--------------FIRST GRAPH(S)----------------------------------
-#     html.H1('Data & Graphs for Olympics'),
-#     html.P('Choose a Sport'),
-#     dcc.Dropdown(id= 'sportpicker-dropdown',
-#     options= dropdown_options_medals_athlets,
-#     value='Snowboarding'
-#     ),
-#     dcc.RadioItems(id = 'sub-options-dropdown', options= sub_options_dropdown, value= 'Medals Won'), # open-high-low-close(options)
-#     dcc.Graph(id = 'athlete-medal-graph'), # first graph
-#     #-------------SECOND GRAPH(S)----------------------------------
-#     html.H1('How Many Medals Sweden Has Won In The Olympics'),
-#     html.P('Choose a Season'),
-#     dcc.Dropdown(id = 'game-picker',
-#     options=game_dict,
-#     value='1'
-#     ),
-#     dcc.Graph(id = 'sweden-medal-graph') # second graph
-
-#     ]
-# )
-
 # To control our element that we've created
 @app.callback(
     Output("athlete-medal-graph", "figure"),
