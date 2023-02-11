@@ -3,4 +3,4 @@ gunicorn
 pandas
 numpy
 plotly_express
-matplotlib.pyplot
+matplotlib
