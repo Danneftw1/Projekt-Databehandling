@@ -56,8 +56,6 @@ app = dash.Dash(
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
 
-server = app.server
-
 app.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_medals, sub_options_dropdown, game_dict, treemap_medal_dict).layout()
 server = app.server
 
