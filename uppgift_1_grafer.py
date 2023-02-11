@@ -8,7 +8,7 @@ file_path = "Data/athlete_events.csv"
 # load the data as a dataFrame
 df_data = pd.read_csv(file_path)
 
-# encrypt the athletes names. TODO check why error message is not working.
+# encrypt the athletes names.
 df_data = hd.hash_Columns(df_data, ["Name"])
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
