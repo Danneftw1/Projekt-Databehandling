@@ -1,5 +1,6 @@
 dash==2.6.0
 gunicorn
 pandas
+numpy
 plotly_express
 matplotlib.pyplot
