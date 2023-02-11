@@ -1,0 +1,7 @@
+dash==2.6.0
+pandas
+os
+dash.dependencies
+dash_bootstrap_components
+hash_data
+layout
