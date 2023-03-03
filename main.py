@@ -50,14 +50,14 @@ sub_options_treemap = [
 ]
 
 # Creates the Dash app
-app = dash.Dash(
+app_dash = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.LUMEN],
     meta_tags=[dict(name="viewport", content="width=device-width, initial-scale=1.0")],
 )
 
-app.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_medals, sub_options_dropdown, game_dict, treemap_medal_dict).layout()
-server = app.server
+app_dash.layout = Layout(dropdown_options_medals_athlets, dropdown_options_sweden_medals, sub_options_dropdown, game_dict, treemap_medal_dict).layout()
+server = app_dash.server
 
 # To control our element that we've created
 @app.callback(
@@ -105,7 +105,7 @@ def update_treemap_graph(medal):
         return treemap_most_x_medals_won(medal, athlete_events)
 
 if __name__ == '__main__':
-    app.run_server(debug = False)
+    app_dash.run_server(debug = False)
 
 
 
