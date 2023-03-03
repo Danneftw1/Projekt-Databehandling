@@ -60,7 +60,7 @@ app_dash.layout = Layout(dropdown_options_medals_athlets, dropdown_options_swede
 server = app_dash.server
 
 # To control our element that we've created
-@app.callback(
+@app_dash.callback(
     Output("athlete-medal-graph", "figure"),
     Input("sportpicker-dropdown", "value"),
     Input("sub-options-dropdown", "value"),
@@ -81,7 +81,7 @@ def update_first_graph(sport, graph):
 
 
 # Controlling elements for second graph
-@app.callback(
+@app_dash.callback(
     Output("sweden-medal-graph", "figure"),
     Input("game-picker", "value") 
 )
@@ -89,7 +89,7 @@ def update_first_graph(sport, graph):
 def update_second_graph(season):
     return total_medels_os(season)
 
-@app.callback(
+@app_dash.callback(
     Output("treemap_graph", "figure"),
     Input("treemap_buttons", "value")
 )
